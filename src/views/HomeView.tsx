@@ -4,7 +4,6 @@ import ProductCard from "../components/Products/productCard";
 import getProducts from "../actions/getProducts";
 import NullData from "../components/NullData";
 import { ProductFilterParams } from "../types";
-import b1 from "../assets/b1.jpg";
 import Image from "next/image";
 
 interface HomeViewsProps {
@@ -18,7 +17,12 @@ const HomeViews = async ({
   return (
     <div>
       <div className="relative w-full h-[250px]  mt-1">
-        <Image alt="banner1" src={b1} fill className="object-cover" />
+        <Image
+          alt="banner1"
+          src={"/assets/banner1.jpg"}
+          fill
+          className="object-cover"
+        />
         <div className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
           <div className="text-center">
             <h1 className="font-bold text-3xl">#ThriftFinds</h1>

@@ -6,6 +6,7 @@ import ShoppingCart from "./Navigation/shoppingCart";
 import UserMenu from "./NavbarItems/userMenu";
 import { getCurrentUser } from "@/src/actions/getCurrentUser";
 import Categories from "./Categories";
+import Image from "next/image";
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -42,9 +43,15 @@ const Navbar = async (): Promise<React.ReactElement> => {
           >
             <Link href={"/"} className="flex items-center">
               <div
-                className={`text-slate-800 text-3xl ${pacifico.className} pt-1 ms-2`}
+                className={`text-slate-800 text-3xl ${pacifico.className} pt-1 ms-2 flex flex-row items-center gap-2`}
               >
-                {STORE_NAME}🌿
+                <Image
+                  src="/assets/bcs-2-removebg.png"
+                  alt="logo"
+                  width={31}
+                  height={31}
+                />
+                {STORE_NAME}
               </div>
             </Link>
             <div className="flex items-center gap-8 md:gap-12">
