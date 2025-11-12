@@ -11,13 +11,3 @@ export async function DELETE (request: Request, { params }: { params: { id: stri
 
   return NextResponse.json(product)
 }
-
-export async function GET (request: Request, { params }: { params: { id: string } }): Promise<NextResponse> {
-  const product = await prisma.product.findFirst({
-    where: {
-      id: params.id
-    }
-  })
-
-  return NextResponse.json(product?.stock)
-}
