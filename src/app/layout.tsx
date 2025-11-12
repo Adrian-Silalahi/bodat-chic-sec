@@ -5,9 +5,10 @@ import { Poppins } from "next/font/google";
 import Navbar from "../components/Navbar/navbar";
 import Footer from "../components/Footer/footer";
 import { CartContextProvider } from "../hooks/useCart";
-import NextAuthProvider from "../providers/NextAuthProvider"; // <-- 1. Import provider baru Anda
+import NextAuthProvider from "../providers/NextAuthProvider";
 import { Toaster } from "react-hot-toast";
-import { headers } from "next/headers";
+import { AuthModalContextProvider } from "../hooks/useAuthModal";
+import AuthModal from "../components/Auth/AuthModal";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -26,34 +27,30 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }): JSX.Element | undefined {
-  const headersList = headers();
-  const pathname = headersList.get("x-invoke-path") ?? "";
-  const disabledNavFooter = ["/login", "/register"];
-  const isNotAuthPage = Boolean(!disabledNavFooter.includes(pathname));
-
-  if (pathname !== null) {
-    return (
-      <html lang="en">
-        <body className={`text-slate-700 ${poppins.className}`}>
-          <Toaster
-            toastOptions={{
-              style: {
-                background: "rgb(51 65 85)",
-                color: "#fff",
-              },
-            }}
-          />
-          <NextAuthProvider>
-            <CartContextProvider>
+  return (
+    <html lang="en">
+      <body className={`text-slate-700 ${poppins.className}`}>
+        <Toaster
+          toastOptions={{
+            style: {
+              background: "rgb(51 65 85)",
+              color: "#fff",
+            },
+          }}
+        />
+        <NextAuthProvider>
+          <CartContextProvider>
+            <AuthModalContextProvider>
+              <AuthModal />
               <div className="flex flex-col min-h-screen ">
-                {isNotAuthPage && <Navbar />}
+                <Navbar />
                 <main className="flex-grow bg-white font">{children}</main>
-                {isNotAuthPage && <Footer />}
+                <Footer />
               </div>
-            </CartContextProvider>
-          </NextAuthProvider>
-        </body>
-      </html>
-    );
-  }
+            </AuthModalContextProvider>
+          </CartContextProvider>
+        </NextAuthProvider>
+      </body>
+    </html>
+  );
 }

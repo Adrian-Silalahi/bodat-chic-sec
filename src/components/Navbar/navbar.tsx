@@ -1,21 +1,21 @@
-import React from 'react'
-import Link from 'next/link'
-import Container from '../Container'
-import { Pacifico } from 'next/font/google'
-import ShoppingCart from './Navigation/shoppingCart'
-import UserMenu from './NavbarItems/userMenu'
-import { getCurrentUser } from '@/src/actions/getCurrentUser'
-import Categories from './Categories'
+import React from "react";
+import Link from "next/link";
+import Container from "../Container";
+import { Pacifico } from "next/font/google";
+import ShoppingCart from "./Navigation/shoppingCart";
+import UserMenu from "./NavbarItems/userMenu";
+import { getCurrentUser } from "@/src/actions/getCurrentUser";
+import Categories from "./Categories";
 
 const pacifico = Pacifico({
-  subsets: ['latin'],
-  weight: '400'
-})
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const Navbar = async (): Promise<React.ReactElement> => {
-  const STORE_NAME = 'Bodat Chic'
-  const currentUser = await getCurrentUser()
-  
+  const STORE_NAME = "Bodat Chic";
+  const currentUser = await getCurrentUser();
+
   return (
     <div
       className="
@@ -40,7 +40,7 @@ const Navbar = async (): Promise<React.ReactElement> => {
           mb-1
           "
           >
-            <Link href={'/'} className="flex items-center">
+            <Link href={"/"} className="flex items-center">
               <div
                 className={`text-slate-800 text-3xl ${pacifico.className} pt-1 ms-2`}
               >
@@ -49,17 +49,17 @@ const Navbar = async (): Promise<React.ReactElement> => {
             </Link>
             <div className="flex items-center gap-8 md:gap-12">
               {currentUser && (
-                <h2 className='text-slate-800 '>Hi, {currentUser?.name}</h2>
+                <h2 className="text-slate-800 ">Hi, {currentUser?.name}</h2>
               )}
-              <ShoppingCart currentUser={currentUser}/>
-              <UserMenu currentUser={currentUser}/>
+              <ShoppingCart currentUser={currentUser} />
+              <UserMenu currentUser={currentUser} />
             </div>
           </div>
         </Container>
       </div>
-      <Categories/>
+      <Categories />
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

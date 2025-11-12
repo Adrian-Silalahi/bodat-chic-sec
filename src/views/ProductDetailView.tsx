@@ -59,12 +59,12 @@ const ProductDetailView: React.FC<TypeProps> = ({ product, user }) => {
           <h2 className="text-lg md:text-2xl font-bold text-slate-800">
             {product.name}
           </h2>
-          <div className="flex flex-col text-md  text-slate-500 font-thin">
+          <div className="flex flex-col text-sm  text-slate-500 font-thin">
             <div>
               SIZE :<span className="ml-2">{product.size}</span>
             </div>
           </div>
-          <div className="text-md md:text-lg font-extrabold text-slate-900">
+          <div className="text-md md:text-sm font-extrabold text-slate-900">
             {formatRupiah(product.price)}
           </div>
         </div>
@@ -87,8 +87,8 @@ const ProductDetailView: React.FC<TypeProps> = ({ product, user }) => {
         {/* Bagian ini tidak diubah logikanya, hanya penempatannya */}
         {!user ? (
           <div className="flex flex-col items-center p-4 bg-slate-100 rounded-lg">
-            <div className="text-xl font-semibold text-slate-700">
-              Please login first
+            <div className="text-lgl font-semibold text-slate-700">
+              Please log in to proceed with checkout
             </div>
             <Link
               href={"/login"}
