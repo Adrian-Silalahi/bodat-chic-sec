@@ -123,7 +123,7 @@ import { useRouter } from "next/navigation";
 import { type FieldValues, type SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import { useAuthModal } from "@/src/hooks/useAuthModal"; // <-- IMPORT HOOK
+import { useAuthModal } from "@/src/hooks/useAuthModal";
 
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -217,18 +217,13 @@ const LoginForm: React.FC = () => {
       </div>
       {/* MODIFIKASI NAVIGASI */}
       <div className="text-center mt-4">
-        <Navigation
-          isLoading={isLoading}
-          text={"Don't have an account?"}
-          path="/register"
+        <span className="text-neutral-500">Don't have an account?</span>
+        <span
+          onClick={authModal.toggleView} // <-- Ganti ke Register
+          className="bg-gradient-to-b from-blue-800 to-rose-500 text-transparent bg-clip-text ml-2 cursor-pointer hover:underline"
         >
-          <span
-            onClick={authModal.toggleView} // <-- Ganti ke Register
-            className="bg-gradient-to-b from-blue-800 to-rose-500 text-transparent bg-clip-text ml-2 cursor-pointer hover:underline"
-          >
-            Sign Up
-          </span>
-        </Navigation>
+          Sign Up
+        </span>
       </div>
     </>
   );

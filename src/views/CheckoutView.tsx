@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import CustomButton from "@/src/components/CustomButton";
 import CheckoutForm from "../app/checkout/checkoutForm";
+import { useAuthModal } from "../hooks/useAuthModal";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -23,6 +24,7 @@ const CheckoutView = (): React.ReactElement => {
   const [clientSecret, setClientSecret] = useState("");
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const router = useRouter();
+  const authModal = useAuthModal();
 
   useEffect(() => {
     if (cartProducts?.length) {
@@ -39,7 +41,7 @@ const CheckoutView = (): React.ReactElement => {
         .then((response) => {
           setIsCheckoutLoading(false);
           if (response.status === 401) {
-            router.push("/login");
+            authModal.onOpen("login");
             toast.error("Please login");
           }
           return response.json();

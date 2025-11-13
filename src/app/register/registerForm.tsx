@@ -253,18 +253,13 @@ const RegisterForm: React.FC = () => {
 
       {/* 4. MODIFIKASI NAVIGASI */}
       <div className="text-center mt-4">
-        <Navigation
-          isLoading={isLoading}
-          text={"Already have an account?"}
-          path="/login"
+        <span className="text-neutral-500">Already have an account?</span>
+        <span
+          onClick={authModal.toggleView} // <-- Ganti ke Login
+          className="bg-gradient-to-b from-blue-800 to-rose-500 text-transparent bg-clip-text ml-2 cursor-pointer hover:underline"
         >
-          <span
-            onClick={authModal.toggleView} // <-- Ganti ke Login
-            className="bg-gradient-to-b from-blue-800 to-rose-500 text-transparent bg-clip-text ml-2 cursor-pointer hover:underline"
-          >
-            Login
-          </span>
-        </Navigation>
+          Login
+        </span>
       </div>
     </>
   );

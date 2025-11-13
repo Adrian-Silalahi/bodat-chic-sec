@@ -12,6 +12,7 @@ import { User } from "@prisma/client";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 import { formatRupiah } from "../utils/FormatRupiah";
+import { useAuthModal } from "../hooks/useAuthModal";
 
 interface TypeProps {
   product: any;
@@ -36,6 +37,7 @@ const ProductDetailView: React.FC<TypeProps> = ({ product, user }) => {
     price: product.price,
   });
 
+  const authModal = useAuthModal(); // <-- GUNAKAN HOOK
   const MIN_LENGTH_FOR_BUTTON = 200;
 
   useEffect(() => {
@@ -91,11 +93,12 @@ const ProductDetailView: React.FC<TypeProps> = ({ product, user }) => {
               Please log in to proceed with checkout
             </div>
             <Link
-              href={"/login"}
+              href="#"
+              onClick={() => authModal.onOpen("login")}
               className="text-slate-600 flex items-center gap-1 mt-2 hover:text-slate-800 transition"
             >
               <MdArrowBack />
-              <span>Login</span>
+              <span className="cursor-pointer">Login</span>
             </Link>
           </div>
         ) : isProductInCart ? (

@@ -8,6 +8,7 @@ import CustomButton from "../components/CustomButton";
 import CartItem from "../app/cart/CartItem";
 import { type SafeUser } from "../types";
 import { useRouter } from "next/navigation";
+import { useAuthModal } from "../hooks/useAuthModal";
 
 interface CartViewProps {
   currentUser?: SafeUser | null;
@@ -18,6 +19,8 @@ const CartView: React.FC<CartViewProps> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const emprtyCartProducts = !cartProducts || cartProducts.length === 0;
+
+  const authModal = useAuthModal();
 
   const handleCheckout = (): void => {
     setIsLoading(true);
@@ -30,12 +33,13 @@ const CartView: React.FC<CartViewProps> = ({ currentUser }) => {
         <div className="text-2xl">Please login first</div>
         <div>
           <Link
-            href={"/login"}
+            href={"#"}
+            onClick={() => authModal.onOpen("login")}
             className="
                   text-slate-500 flex items-center gap-1 mt-2"
           >
             <MdArrowBack />
-            <span>Login</span>
+            <span className="cursor-pointer">Login</span>
           </Link>
         </div>
       </div>
