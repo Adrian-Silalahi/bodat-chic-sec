@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
-import { formatRupiah } from "../utils/FormatRupiah";
+import { formatDolar } from "../utils/FormatDolar";
 import { useAuthModal } from "../hooks/useAuthModal";
 
 interface TypeProps {
@@ -67,7 +67,7 @@ const ProductDetailView: React.FC<TypeProps> = ({ product, user }) => {
             </div>
           </div>
           <div className="text-md md:text-sm font-extrabold text-slate-900">
-            {formatRupiah(product.price)}
+            {formatDolar(product.price)}
           </div>
         </div>
         <hr className="my-2 mb-4" /> {/* Pemisah tipis */}

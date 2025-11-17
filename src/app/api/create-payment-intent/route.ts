@@ -18,7 +18,7 @@ const getTotalPrice = (products: ProductType[]): number => {
     return acc + priceAsNumber
   }, 0)
 
-  return Math.floor(totalPriceAllProducts)
+  return totalPriceAllProducts
 }
 
 export async function POST (request: Request): Promise<NextResponse> {
@@ -36,7 +36,7 @@ try{
   const { cartProducts } = body
   const paymentIntentId = currentUser?.paymentIntentId
   const total = getTotalPrice(cartProducts)
-  const stripeTotal = total  // convert to cents
+  const stripeTotal = Math.round(total * 100)// convert to cents
   const orderData = {
     userId: currentUser?.id,
     amount: total,
@@ -47,7 +47,9 @@ try{
     products: cartProducts
   }
 
+
   if (paymentIntentId) {
+    console.log('Masuk to update payment intent')
 
     const currentIntent = await stripe.paymentIntents.retrieve(
       paymentIntentId
@@ -79,11 +81,10 @@ try{
           }
     })
 
-    
-
     return NextResponse.json({ paymentIntent: updatedIntent })
     }
   }else{
+    console.log('Masuk to Creating new payment intent')
   const paymentIntent = await stripe.paymentIntents.create({
     amount: stripeTotal,
     currency: 'usd',

@@ -83,18 +83,6 @@ model Order {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// type ProductType {
-//   id          String
-//   productId   String?
-//   name        String
-//   description String
-//   category    String
-//   brand       String
-//   variations  ImgResponse
-//   quantity    Int
-//   price       Float
-// }
-
 type CartProductType {
   id          String
   productId   String
@@ -106,12 +94,6 @@ type CartProductType {
   image       String
   price       Float
   size        String
-}
-
-type ImgResponse {
-  color     String
-  colorCode String
-  images    String[]
 }
 
 type Adress {

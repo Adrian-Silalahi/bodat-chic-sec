@@ -3,8 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import TruncateText from "@/src/utils/TruncateText";
-import { formatRupiah } from "@/src/utils/FormatRupiah";
 import { useRouter } from "next/navigation";
+import { formatDolar } from "@/src/utils/FormatDolar";
 
 interface ProductCardProps {
   product: any;
@@ -47,7 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Price */}
         <div className="font-semibold text-[#147463]">
-          {formatRupiah(product?.price)}
+          {formatDolar(product?.price)}
         </div>
       </div>
     </div>
