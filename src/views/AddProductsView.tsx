@@ -21,7 +21,7 @@ const AddProductsView = (): React.ReactElement => {
   const [isProductCreated, setIsProductCreated] = useState(false);
   const router = useRouter();
 
-  const { 
+  const {
     register,
     handleSubmit,
     setValue,
@@ -63,15 +63,6 @@ const AddProductsView = (): React.ReactElement => {
       setIsLoading(false);
       return toast.error("Please add at least one image");
     }
-
-    // await uploadImageToFirebase({ productData, uploadedImages, setIsLoading });
-    // const currentProductData = { ...productData, imageInfo: uploadedImages };
-    // postProductToDataBase({
-    //   currentProductData,
-    //   setIsProductCreated,
-    //   setIsLoading,
-    //   router,
-    // });
 
     const uploadedImageUrls = await uploadImagesToFirebase(
       productData.images,

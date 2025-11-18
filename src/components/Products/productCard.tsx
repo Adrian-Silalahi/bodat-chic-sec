@@ -28,14 +28,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="aspect-square overflow-hidden relative w-full mb-4 ">
           <Image
             fill
-            src={product.images[0]}
+            src={product.images[0].url}
             alt={product?.name}
             className="w-full h-full object-contain "
           />
         </div>
 
         {/* Title */}
-        <div className="text-center font-bold">
+        <div className="text-start font-bold">
           {TruncateText(product?.name)}
         </div>
 

@@ -14,9 +14,17 @@ export default async function getProducts (params: ProductFilterParams): Promise
 
     let products: Product[]
 
+    // products = await prisma.product.findMany({
     products = await prisma.product.findMany({
       where: {
         ...query,
+      },
+      include: {
+        images: {
+          orderBy: {
+            sequence: 'asc',
+          },
+        },
       },
     })
     return products

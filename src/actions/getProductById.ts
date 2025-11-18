@@ -12,6 +12,13 @@ export default async function getProductById(params: IParams){
             where: {
                 id: productId
             },
+            include: {
+                images: {
+                    orderBy: {
+                        sequence: 'asc',
+                    },
+                },
+            },
         })
 
         if(!product){

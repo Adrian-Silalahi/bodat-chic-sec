@@ -1,11 +1,11 @@
 const TruncateText = (productName: string): string => {
-  const MAXIMUM_PRODUCT_NAME_LENGTH = 25
+  const MAXIMUM_PRODUCT_NAME_LENGTH = 25;
 
   if (productName?.length < MAXIMUM_PRODUCT_NAME_LENGTH) {
-    return productName
+    return productName;
   } else {
-    return `${productName?.substring(0, 25)}...`
+    return `${productName?.substring(0, 23)}...`;
   }
-}
+};
 
-export default TruncateText
+export default TruncateText;

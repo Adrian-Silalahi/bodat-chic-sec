@@ -32,7 +32,7 @@ const ProductDetailView: React.FC<TypeProps> = ({ product, user }) => {
     description: product.description,
     category: product.category,
     brand: product.brand,
-    image: product.images[0],
+    image: product.images[0].url,
     size: product.size,
     price: product.price,
   });

@@ -1,6 +1,7 @@
 "use client";
 
 import { type CartProductType, type VariationResponseType } from "@/src/types";
+import { type ProductImage } from "@prisma/client";
 import Image from "next/image";
 import React from "react";
 
@@ -14,8 +15,9 @@ const ProductImage: React.FC<ProductImageProps> = ({
   product,
 }) => {
   const [selectedImage, setSelectedImage] = React.useState(
-    selectedProduct.image
+    selectedProduct.image //Type images masih array string di type.ts
   );
+
   return (
     <div className="flex flex-col gap-4 ">
       {/* Gambar Besar */}
@@ -30,26 +32,26 @@ const ProductImage: React.FC<ProductImageProps> = ({
 
       {/* Pilihan Gambar */}
       <div className="flex flex-row flex-wrap justify-center gap-4 cursor-pointer  ">
-        {product?.images.map((imageUrl: string, index: number) => {
+        {product?.images.map((image: ProductImage, index: number) => {
           // Kita perlu key yang unik untuk setiap gambar
-          const uniqueKey = `${imageUrl}-${index}`;
+          const uniqueKey = `${image.url}-${index}`;
 
           return (
             <div
               key={uniqueKey}
               onClick={() => {
-                setSelectedImage(imageUrl);
+                setSelectedImage(image.url);
               }}
               className={`relative w-20 aspect-square rounded-md overflow-hidden cursor-pointer 
             ring-2 transition-all
             ${
-              selectedImage === imageUrl
+              selectedImage === image.url
                 ? "ring-teal-500" // Aktif
                 : "ring-transparent hover:ring-slate-300" // Tidak aktif
             }`}
             >
               <Image
-                src={imageUrl}
+                src={image.url}
                 alt={`Image ${index + 1}`}
                 fill
                 className="object-cover"
