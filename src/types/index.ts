@@ -1,4 +1,11 @@
 import { type User } from '@prisma/client'
+import { type Prisma } from "@prisma/client";
+
+export type ProductWithImages = Prisma.ProductGetPayload<{
+  include: {
+    images: true, 
+  },
+}>;
 
 export type SafeUser = Omit<User, 'createdAt' | 'updatedAt' | 'emailVerified'> & {
   createdAt: string
@@ -24,10 +31,18 @@ export interface ProductType {
   description: string
   category: string
   brand: string
-  images: string[]
+  images: ProductImageType[]
   price: number
   size: string
 }
+
+export interface ProductImageType {
+  id?: string
+  productId?: string
+  url: string
+  sequence: number
+}
+
 
 export interface CartProductType {
   id?: string

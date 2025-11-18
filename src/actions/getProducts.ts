@@ -1,9 +1,8 @@
-import { type Product } from '@prisma/client'
 import prisma from '../libs/prismadb'
-import { ProductFilterParams } from '../types'
+import { ProductFilterParams, ProductWithImages } from '../types'
 
 
-export default async function getProducts (params: ProductFilterParams): Promise<Product[]> {
+export default async function getProducts (params: ProductFilterParams): Promise<ProductWithImages[]> {
   try {
     const { category } = params
     const query: any = {}
@@ -12,7 +11,7 @@ export default async function getProducts (params: ProductFilterParams): Promise
       query.category = category
     }
 
-    let products: Product[]
+    let products: ProductWithImages[]
 
     // products = await prisma.product.findMany({
     products = await prisma.product.findMany({

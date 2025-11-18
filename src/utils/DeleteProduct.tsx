@@ -1,3 +1,4 @@
+import { ProductImage } from "@prisma/client";
 import axios from "axios";
 import { type FirebaseStorage, deleteObject, ref } from "firebase/storage";
 import { type AppRouterInstance } from "next/dist/shared/lib/app-router-context";
@@ -5,7 +6,7 @@ import toast from "react-hot-toast";
 
 interface deleteProductProps {
   id: string;
-  images: string[];
+  images: ProductImage[];
   storage: FirebaseStorage;
   router: AppRouterInstance;
 }
@@ -20,7 +21,7 @@ export const deleteProduct = async ({
     try {
       for (const image of images) {
         if (image) {
-          const imageRef = ref(storage, image);
+          const imageRef = ref(storage, image.url);
           await deleteObject(imageRef);
         }
       }

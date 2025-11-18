@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useCallback } from "react";
-import { type Product } from "@prisma/client";
+import { ProductImage } from "@prisma/client";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import { formatDolar } from "../utils/FormatDolar";
 import Heading from "../components/Heading";
@@ -13,14 +13,16 @@ import { useRouter } from "next/navigation";
 import { getStorage } from "firebase/storage";
 import firebaseApp from "../libs/firebase";
 import { deleteProduct } from "../utils/DeleteProduct";
+import { ProductWithImages } from "../types";
 
 interface ManageProductsViewProps {
-  products: Product[];
+  products: ProductWithImages[];
 }
 
 const ManageProductsView: React.FC<ManageProductsViewProps> = ({
   products,
 }) => {
+  console.log("manage products", products);
   const router = useRouter();
   const storage = getStorage(firebaseApp);
   let rows: any = [];
@@ -80,9 +82,12 @@ const ManageProductsView: React.FC<ManageProductsViewProps> = ({
     },
   ];
 
-  const handleDelete = useCallback(async (id: string, images: any[]) => {
-    await deleteProduct({ id, images, storage, router });
-  }, []);
+  const handleDelete = useCallback(
+    async (id: string, images: ProductImage[]) => {
+      await deleteProduct({ id, images, storage, router });
+    },
+    []
+  );
 
   return (
     <div className="max-w-[1000px] m-auto text-xl">
