@@ -27,7 +27,7 @@ export async function POST (request: Request): Promise<NextResponse> {
       size: size,
       price: parseFloat(price),
     },
-    include: { images: true },
+    // include: { images: true },
   })
 
   return NextResponse.json(product)
