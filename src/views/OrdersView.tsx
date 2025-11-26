@@ -4,7 +4,7 @@
 import React from "react";
 import { type Order, type User } from "@prisma/client";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
-import { formatDolar } from "../utils/FormatDolar";
+import { formatRupiah } from "../utils/FormatRupiah";
 import Heading from "../components/Heading";
 import Status from "../components/Status";
 import {
@@ -33,7 +33,7 @@ const OrdersView: React.FC<OrdersViewProps> = ({ orders }) => {
       return {
         id: order.id,
         customer: order.user?.name,
-        amount: formatDolar(order.amount),
+        amount: formatRupiah(order.amount),
         paymentStatus: order.status,
         date: moment(order.createDate).fromNow(),
         deliveryStatus: order.deliveryStatus,

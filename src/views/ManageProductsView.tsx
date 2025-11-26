@@ -4,7 +4,7 @@
 import React, { useCallback } from "react";
 import { ProductImage } from "@prisma/client";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
-import { formatDolar } from "../utils/FormatDolar";
+import { formatRupiah } from "../utils/FormatRupiah";
 import Heading from "../components/Heading";
 import Status from "../components/Status";
 import { MdClose, MdDelete, MdDone, MdRemoveRedEye } from "react-icons/md";
@@ -32,7 +32,7 @@ const ManageProductsView: React.FC<ManageProductsViewProps> = ({
       return {
         id: product.id,
         name: product.name,
-        price: formatDolar(product.price),
+        price: formatRupiah(product.price),
         category: product.category,
         brand: product.brand,
         images: product.images,

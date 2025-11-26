@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import moment from "moment";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { formatDolar } from "../utils/FormatDolar";
+import { formatRupiah } from "../utils/FormatRupiah";
 
 interface ManageOrdersViewProps {
   orders: ExtendedOrder[];
@@ -36,7 +36,7 @@ const ManageOrdersView: React.FC<ManageOrdersViewProps> = ({ orders }) => {
       return {
         id: order.id,
         customer: order.user?.name,
-        amount: formatDolar(order.amount),
+        amount: formatRupiah(order.amount),
         paymentStatus: order.status,
         date: moment(order.createDate).fromNow(),
         deliveryStatus: order.deliveryStatus,

@@ -3,7 +3,7 @@
 import CustomButton from "@/src/components/CustomButton";
 import Heading from "@/src/components/Heading";
 import { useCart } from "@/src/hooks/useCart";
-import { formatDolar } from "@/src/utils/FormatDolar";
+import { formatRupiah } from "@/src/utils/FormatRupiah";
 import {
   PaymentElement,
   useElements,
@@ -29,7 +29,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
     isCheckoutLoading,
     setIsCheckoutLoading,
   } = useCart();
-  const formattedPrice = formatDolar(cartTotalPrice);
+  const formattedPrice = formatRupiah(cartTotalPrice);
   const stripe = useStripe();
   const elements = useElements();
 

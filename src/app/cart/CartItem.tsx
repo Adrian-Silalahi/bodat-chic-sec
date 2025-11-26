@@ -6,7 +6,7 @@ import Image from "next/image";
 import Counter from "@/src/components/Counter/counter";
 import { useCart } from "@/src/hooks/useCart";
 import { CartProductType } from "@/src/types";
-import { formatDolar } from "@/src/utils/FormatDolar";
+import { formatRupiah } from "@/src/utils/FormatRupiah";
 
 interface CartItemProps {
   product: CartProductType;
@@ -46,10 +46,10 @@ const CartItem: React.FC<CartItemProps> = ({ product }) => {
         </div>
       </div>
       <div className="justify-self-center hover:cursor-pointer">
-        {formatDolar(product?.price)}
+        {formatRupiah(product?.price)}
       </div>
       <div className="justify-self-end font-semibold">
-        {formatDolar(product?.price)}
+        {formatRupiah(product?.price)}
       </div>
     </div>
   );

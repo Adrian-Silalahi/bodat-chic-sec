@@ -3,7 +3,7 @@
 import { type Order, type Product, type User } from "@prisma/client";
 import React, { useEffect, useState } from "react";
 import Heading from "../components/Heading";
-import { formatDolar } from "../utils/FormatDolar";
+import { formatRupiah } from "../utils/FormatRupiah";
 
 interface SummaryViewsProps {
   orders: Order[];
@@ -96,7 +96,7 @@ const SummaryViews: React.FC<SummaryViewsProps> = ({
               >
                 <div className="text-xl md:text-3xl font-bold text-[#147463]">
                   {summaryData[key].label === "Total Sale" ? (
-                    <>{formatDolar(summaryData[key].digit)}</>
+                    <>{formatRupiah(summaryData[key].digit)}</>
                   ) : (
                     <>{summaryData[key].digit}</>
                   )}

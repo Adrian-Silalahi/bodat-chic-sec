@@ -1,7 +1,7 @@
 "use client";
 
 import { CartProductType } from "@/src/types";
-import { formatDolar } from "@/src/utils/FormatDolar";
+import { formatRupiah } from "@/src/utils/FormatRupiah";
 import TruncateText from "@/src/utils/TruncateText";
 import Image from "next/image";
 import React from "react";
@@ -27,7 +27,7 @@ const OrderItem: React.FC<OrderItemProps> = ({ product }) => {
         </div>
       </div>
       <div className="justify-self-center font-semibold">
-        {formatDolar(product?.price)}
+        {formatRupiah(product?.price)}
       </div>
     </div>
   );

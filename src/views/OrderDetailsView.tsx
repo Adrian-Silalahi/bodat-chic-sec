@@ -3,7 +3,7 @@
 import { type Order } from "@prisma/client";
 import React from "react";
 import Heading from "../components/Heading";
-import { formatDolar } from "../utils/FormatDolar";
+import { formatRupiah } from "../utils/FormatRupiah";
 import { MdAccessTimeFilled, MdDeliveryDining, MdDone } from "react-icons/md";
 import Status from "../components/Status";
 import moment from "moment";
@@ -22,7 +22,7 @@ const OrderDetailsView: React.FC<OrderDetailsViewProps> = ({ order }) => {
       <div>Order ID: {order.id}</div>
       <div>
         Total Amount:{" "}
-        <span className="font-bold">{formatDolar(order.amount)}</span>
+        <span className="font-bold">{formatRupiah(order.amount)}</span>
       </div>
       <div className="flex gap-2 items-center">
         <div>Payment status:</div>
