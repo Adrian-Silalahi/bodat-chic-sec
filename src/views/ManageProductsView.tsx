@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 "use client";
 
 import React, { useCallback } from "react";
@@ -6,12 +5,9 @@ import { ProductImage } from "@prisma/client";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import { formatRupiah } from "../utils/FormatRupiah";
 import Heading from "../components/Heading";
-import Status from "../components/Status";
-import { MdClose, MdDelete, MdDone, MdRemoveRedEye } from "react-icons/md";
+import { MdDelete, MdRemoveRedEye } from "react-icons/md";
 import ActionButton from "../components/Products/ActionButton";
 import { useRouter } from "next/navigation";
-import { getStorage } from "firebase/storage";
-import firebaseApp from "../libs/firebase";
 import { deleteProduct } from "../utils/DeleteProduct";
 import { ProductWithImages } from "../types";
 
@@ -22,22 +18,18 @@ interface ManageProductsViewProps {
 const ManageProductsView: React.FC<ManageProductsViewProps> = ({
   products,
 }) => {
-  console.log("manage products", products);
   const router = useRouter();
-  const storage = getStorage(firebaseApp);
   let rows: any = [];
 
   if (products) {
-    rows = products.map((product) => {
-      return {
-        id: product.id,
-        name: product.name,
-        price: formatRupiah(product.price),
-        category: product.category,
-        brand: product.brand,
-        images: product.images,
-      };
-    });
+    rows = products.map((product) => ({
+      id: product.id,
+      name: product.name,
+      price: formatRupiah(product.price),
+      category: product.category,
+      brand: product.brand,
+      images: product.images,
+    }));
   }
 
   const columns: GridColDef[] = [
@@ -47,10 +39,9 @@ const ManageProductsView: React.FC<ManageProductsViewProps> = ({
       field: "price",
       headerName: "Price(Rp)",
       width: 100,
-      renderCell: (params) => {
-        const price = params.row.price;
-        return <div className="font-bold text-slate-800">{price}</div>;
-      },
+      renderCell: (params) => (
+        <div className="font-bold text-slate-800">{params.row.price}</div>
+      ),
     },
     { field: "category", headerName: "Category", width: 100 },
     { field: "brand", headerName: "Brand", width: 100 },
@@ -59,34 +50,30 @@ const ManageProductsView: React.FC<ManageProductsViewProps> = ({
       headerName: "Actions",
       headerAlign: "center",
       width: 200,
-      renderCell: (params) => {
-        const id = params.row.id;
-        const imageInfo = params.row.images;
-        return (
-          <div className="flex justify-center gap-4 w-full">
-            <ActionButton
-              icon={MdDelete}
-              onClick={() => {
-                void handleDelete(id, imageInfo);
-              }}
-            />
-            <ActionButton
-              icon={MdRemoveRedEye}
-              onClick={() => {
-                router.push(`/productDetail/${id}`);
-              }}
-            />
-          </div>
-        );
-      },
+      renderCell: (params) => (
+        <div className="flex justify-center gap-4 w-full">
+          <ActionButton
+            icon={MdDelete}
+            onClick={() => {
+              void handleDelete(params.row.id, params.row.images);
+            }}
+          />
+          <ActionButton
+            icon={MdRemoveRedEye}
+            onClick={() => {
+              router.push(`/productDetail/${params.row.id}`);
+            }}
+          />
+        </div>
+      ),
     },
   ];
 
   const handleDelete = useCallback(
     async (id: string, images: ProductImage[]) => {
-      await deleteProduct({ id, images, storage, router });
+      await deleteProduct({ id, images, router });
     },
-    []
+    [],
   );
 
   return (
@@ -99,9 +86,7 @@ const ManageProductsView: React.FC<ManageProductsViewProps> = ({
           rows={rows}
           columns={columns}
           initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 9 },
-            },
+            pagination: { paginationModel: { page: 0, pageSize: 9 } },
           }}
           pageSizeOptions={[5, 10]}
           disableRowSelectionOnClick
