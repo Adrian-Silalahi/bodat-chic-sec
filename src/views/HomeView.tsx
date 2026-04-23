@@ -27,7 +27,7 @@ const HomeViews = async ({
           <div className="text-center">
             <h1 className="font-bold text-3xl">#ThriftFinds</h1>
             <p className="text-sm">
-              November Fest! — Find The special product for Your Special Moment!
+              Every Day Is Special — Find The Product For Your Special Moment!
             </p>
           </div>
         </div>
